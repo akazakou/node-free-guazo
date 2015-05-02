@@ -1,25 +1,25 @@
 {
-    "name": "events-reactor",
-    "repository" : "",
-    "email": "Andrey.Kazakov@zzima.com",
-    "url": "http://auth2.zzima.com",
-    "description": "Nodejs implementation for ZZima Auth authorization",
-    "version": "0.0.1",
-    "dependencies": {
-        "amqp": "^0.2.0",
-        "body-parser": "^1.9.0",
-        "config" : "*",
-        "request" : "*",
-        "JSONPath" : "*",
-        "connect-multiparty": "^1.2.5",
-        "couchbase": "^2.0.0",
-        "express": "^4.9.7",
-        "express-autoroute": "^1.1.0",
-        "express-winston": "^0.2.12",
-        "memcached": "^2.0.0",
-        "moment": "^2.8.3",
-        "mysql": "^2.5.2",
-        "validator": "^3.21.0",
-        "winston": "^0.8.3"
-    }
+  "name": "events-reactor",
+  "repository": "",
+  "email": "Andrey.Kazakov@zzima.com",
+  "url": "http://auth2.zzima.com",
+  "description": "Nodejs implementation for ZZima Auth authorization",
+  "version": "0.0.1",
+  "dependencies": {
+    "JSONPath": "^0.10.0",
+    "amqp": "^0.2.4",
+    "body-parser": "^1.12.3",
+    "config": "^1.12.0",
+    "connect-multiparty": "^1.2.5",
+    "couchbase": "^2.0.8",
+    "express": "^4.12.3",
+    "express-autoroute": "^1.2.1",
+    "express-winston": "^0.2.12",
+    "memcached": "^2.1.0",
+    "moment": "^2.10.2",
+    "mysql": "^2.6.2",
+    "request": "^2.55.0",
+    "validator": "^3.39.0",
+    "winston": "^0.8.3"
+  }
 }
