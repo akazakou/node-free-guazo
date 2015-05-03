@@ -41,12 +41,20 @@ if (config.get('server.cluster') && cluster.isMaster) {
         bodyParser = require('body-parser'),
         multipart = require('connect-multiparty'),
         expressWinston = require('express-winston'),
+        autoroute = require('express-autoroute'),
         app = express();
     
     // парсинг параметров из json и post
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(multipart());
     app.use(bodyParser.json());
+    
+    // определение автоматических роутов
+    autoroute(app, {
+        throwErrors: true,
+        logger: require('winston'),
+        routesDir: __dirname + '/routes'
+    });
 
     // переопределяем максимальное количество одновременных запросов к сервису
     var http = require('http');

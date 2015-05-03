@@ -3,7 +3,12 @@
         "cluster": false,
         "port": 3001,
         "maxSockets": 4096,
-        "timezone": "Europe/Moscow"
+        "timezone": "Europe/Minsk"
+    },
+
+    "upload": {
+        "directory": "/home/nginx/guazo.kantora.pro/public/upload/",
+        "url": "http://guazo.kantora.pro/upload/"
     },
 
     "services": {
