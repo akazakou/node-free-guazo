@@ -31,7 +31,7 @@
                 "port" : 3306,
                 "user" : "andrey.kazakov",
                 "password" : "andrey.kazakov.password",
-                "database" : "akazakov_eventsreactor",
+                "database" : "guazo",
                 "connectTimeout" : 1000,
                 "connectionLimit" : 50
             }
