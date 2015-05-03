@@ -12,11 +12,11 @@
             "library": "Logger",
             "logs": {
                 "access": {
-                    "path": "/tmp/eventsreactor.access.log",
+                    "path": "/dev/null",
                     "level": "info"
                 },
                 "error": {
-                    "path": "/tmp/eventsreactor.error.log",
+                    "path": "/dev/null",
                     "level": "info"
                 }
             }
