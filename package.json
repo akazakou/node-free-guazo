@@ -1,6 +1,6 @@
 {
     "name": "node-free-guazo",
-    "repository": "git@github.com:akazakou/node-skeleton.git",
+    "repository": "http://github.com/akazakou/node-free-guazo",
     "email": "a.v.kazakou@gmail.com",
     "url": "http://guazo.kantora.pro/",
     "description": "Guazo server side script for uploading screenshots to server",
