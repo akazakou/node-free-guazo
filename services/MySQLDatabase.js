@@ -32,7 +32,7 @@ MySQLDatabase.prototype.init = function (){
     
     connection.connect(function(err) {
         if (err) {
-            return logger.log('error', util.format('Service "%s" can not connect to MySQL database "%s" on host "%s"', self.name, this.config.connection.database, this.config.connection.host), err.stack);
+            return logger.log('error', util.format('Service "%s" can not connect to MySQL database "%s" on host "%s"\n', self.name, self.config.connection.database, self.config.connection.host), err.stack);
         }
 
         self.initialized = true;

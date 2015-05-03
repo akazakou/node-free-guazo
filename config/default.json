@@ -12,84 +12,14 @@
             "library": "Logger",
             "logs": {
                 "access": {
-                    "path": "eventsreactor.access.log",
+                    "path": "/tmp/eventsreactor.access.log",
                     "level": "info"
                 },
                 "error": {
-                    "path": "eventsreactor.error.log",
+                    "path": "/tmp/eventsreactor.error.log",
                     "level": "info"
                 }
             }
-        },
-        
-        "QueuesManager": {
-            "library": "RabbitMQ",
-            "dependencies" : ["Logs","EventsHandler"],
-            "initTimeout" : 1000,
-            
-            "queue": {
-                "name": "eventsreactor.statistic",
-                "options": {
-                    "passive" : false,
-                    "durable" : true,
-                    "exclusive" : false,
-                    "autoDelete" : false,
-                    "noDeclare" : false,
-                    "arguments" : {},
-                    "closeChannelOnUnsubscribe" : false
-                }
-            },
-            
-            "connection": {
-                "host": "127.0.0.1",
-                "port": 5672,
-                "username": "guest",
-                "password": "guest",
-                "connectionTimeout": 500
-            },
-            
-            "subscriptions": {
-                "auth2": [
-                    "bravos",
-                    "auth2.default.*.login",
-                    "auth2.default.version2.social-network-login",
-                    "auth2.default.version2.*.securedtoken.*",
-                    "auth2.default.version3.*.securedtoken.*"
-                ]
-            },
-            
-            "handlers" : [
-                {
-                    "routingKey" : "auth2.default.version2.login",
-                    "service": "EventsHandler",
-                    "method": "amqpMessage"
-                }
-            ]
-        },
-        
-        "EventsHandler" : {
-            "library": "EventsHandler",
-            "dependencies" : ["Logs", "Database"],
-            "initTimeout" : 100,
-            "databaseService" : "Database",
-            "handlers" : [
-                {
-                    "routingKey" : "auth2.default.version2.login",
-                    "table" : "events_auth2_default_version2_login",
-                    "data": {
-                        "user_id" : "user.userid",
-                        "user_name" : "user.zzgold"
-                    }
-                },
-                {
-                    "routingKey" : "auth2.default.version2.logout",
-                    "table" : "events_auth2_default_version2_logout",
-                    "data": {
-                        "user_id" : "user.userid",
-                        "user_name" : "user.userName"
-                    }
-                }
-            ]
         },
         
         "Database" : {
