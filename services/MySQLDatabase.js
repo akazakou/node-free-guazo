@@ -48,10 +48,11 @@ MySQLDatabase.prototype.init = function (){
  * @param {type} data
  * @returns {undefined}
  */
-MySQLDatabase.prototype.insertIgnore = function (table, data){
+MySQLDatabase.prototype.insertIgnore = function (table, data, callback){
     var self = this;
     this.connection.query('INSERT INTO ?? SET ?', [table, data], function(err, result){
         if(err) return logger.log('error', util.format('Service "%s" can not complete query' + "\n" + err.stack, self.name));
+        if(callback !== undefined) callback(result);
     });
 };
 

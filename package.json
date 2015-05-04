@@ -17,6 +17,7 @@
         "winston": "^0.8.3",
         "underscore" : "^1.8.3",
         "MD5": "^1.2.1",
-        "fs-extra": "^0.18.2"
+        "fs-extra": "^0.18.2",
+        "imageinfo": "^1.0.4"
     }
 }
