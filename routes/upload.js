@@ -4,21 +4,8 @@ module.exports.autoroute = {
     }
 };
 
-/*
- { imagedata: 
- { fieldName: 'imagedata',
- originalFilename: 'gyazo.com',
- path: '/tmp/19281-1ru1ikp.com',
- headers: [Object],
- ws: [Object],
- size: 12870,
- name: 'gyazo.com',
- type: null } }
- 
- */
-
 /**
- * Принимает в себя данные загруженного файла, после чего 
+ * Принимает в себя данные загруженного файла, после чего помещает информацию о загруженном файле в базу данных
  * @param {type} req
  * @param {type} res
  * @returns {undefined}
