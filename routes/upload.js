@@ -27,11 +27,12 @@ function uploadAction(req, res) {
             serviceLoader.get('Database').insertIgnore('images', {
                 "md5": hash,
                 "mime" : info.mimeType,
-                "date" : moment().toISOString(),
+                "date" : moment().format("YYYY-MM-DD HH:mm:ss"),
                 "ip" : ip,
                 "width" : info.width,
                 "height" : info.height,
-                "size" : data.length
+                "size" : data.length,
+                "lifetime": moment().add(serviceLoader.get('Cron').config.defaultLifetime, 'seconds').format("YYYY-MM-DD HH:mm:ss")
             }, function(mysqlResult){
                 logger.log('debug', util.format("Image with hash: %s stored success", hash));
             });

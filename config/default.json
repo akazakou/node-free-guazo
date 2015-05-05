@@ -40,6 +40,14 @@
                 "connectTimeout" : 1000,
                 "connectionLimit" : 50
             }
+        },
+        
+        "Cron" : {
+            "library": "Cron",
+            "dependencies" : ["Logs", "Database"],
+            "initTimeout" : 1500,
+            "periodTime" : 10000,
+            "defaultLifetime" : 300
         }
     }
 }
