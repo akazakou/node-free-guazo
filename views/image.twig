@@ -1,0 +1,28 @@
+{% include 'header.twig' %}
+
+        
+    <div class="vertical-center">
+        <div class="container">
+            {% if data is empty %}
+                
+            <h2>Image not found</h2>
+            <p>Image was expired or you entered wrong URL</p>
+            
+            {% else %}
+                <div class="row v">
+                    <div class="col-md-6">
+                        <a href="/" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Image will be expired in {{data.0.duration}}</h4>
+                    </div>
+                </div>
+            <img id="big-image" class="img-thumbnail" src="/upload/{{hash}}.png" alt="Image {{hash}}" title="Image {{hash}}"/>
+            
+            {% endif %}
+        </div>
+    </div> 
+            
+{% include 'footer.twig' %}

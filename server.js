@@ -42,12 +42,22 @@ if (config.get('server.cluster') && cluster.isMaster) {
         multipart = require('connect-multiparty'),
         expressWinston = require('express-winston'),
         autoroute = require('express-autoroute'),
+        twig = require("twig"),
         app = express();
     
     // парсинг параметров из json и post
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(multipart());
     app.use(bodyParser.json());
+    
+    // подключение Twig шаблонизатора
+    app.set('views', __dirname + '/views');
+    app.set('view engine', 'twig');
+
+    // This section is optional and can be used to configure twig.
+    app.set('twig options', { 
+        strict_variables: false
+    });
     
     // определение автоматических роутов
     autoroute(app, {

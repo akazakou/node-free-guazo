@@ -8,13 +8,15 @@
 
     "upload": {
         "directory": "/home/nginx/guazo.kantora.pro/public/upload/",
-        "url": "http://guazo.kantora.pro/upload/"
+        "url": "http://guazo.kantora.pro/image/",
+        "imageUrl": "http://guazo.kantora.pro/upload/"
     },
 
     "services": {
         "Logs": {
             "initTimeout" : 50,
             "library": "Logger",
+            
             "logs": {
                 "access": {
                     "path": "/tmp/eventsreactor.access.log",
@@ -31,6 +33,7 @@
             "library": "MySQLDatabase",
             "dependencies" : ["Logs"],
             "initTimeout" : 1500,
+            
             "connection" : {
                 "host" : "localhost",
                 "port" : 3306,
@@ -42,10 +45,20 @@
             }
         },
         
+        "ManagerImages" : {
+            "library": "ImagesManager",
+            "dependencies" : ["Logs", "Database"],
+            "initTimeout" : 1500,
+            
+            "table" : "images",
+            "limit" : 35
+        },
+        
         "Cron" : {
             "library": "Cron",
             "dependencies" : ["Logs", "Database"],
             "initTimeout" : 1500,
+            
             "periodTime" : 10000,
             "defaultLifetime" : 3600
         }

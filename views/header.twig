@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        
+        <script src="/jquery/jquery.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+        
+        <style>
+            html, body {height: 100%;}
+            div {text-align: center;}
+            div h1 {font-size: 72pt; font-weight: bold; line-height: 12pt; color:#333;}
+            div h1#first {color:#cd0d0d; text-shadow: 1px 1px 2px black, 0 0 1.4em red;}
+            div h1#last {text-shadow: 1px 1px 2px black, 0 0 2px #e8e8e8;}
+            div p {margin-top: 40pt; opacity: 0.2;}
+            
+            .vertical-center {
+              min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+              min-height: 100vh; /* These two lines are counted as one :-)       */
+
+              display: flex;
+              align-items: center;
+            }
+            
+            #big-image {
+                max-width: 75%;
+                max-height: 60%;
+                box-shadow: 0 0 30px black;
+                margin-top: 50px;
+            }
+            
+            #small-image {
+                max-width: 250px;
+                max-height: 250px;
+                box-shadow: 0 0 20px #000;
+                margin: 15px;
+            }
+        </style>
+    </head>
+    <body>

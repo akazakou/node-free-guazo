@@ -41,7 +41,7 @@ function uploadAction(req, res) {
     
     var copyFile = function (hash, source) {
         var path = config.get('upload.directory') + hash + '.png';
-        var url = config.get('upload.url') + hash + '.png';
+        var url = config.get('upload.url') + hash;
         
         fs.move(source, path, function(){
             registerFile(path, url, hash);
