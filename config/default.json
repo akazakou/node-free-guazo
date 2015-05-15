@@ -47,7 +47,7 @@
             "dependencies" : ["Logs", "Database"],
             "initTimeout" : 1500,
             "periodTime" : 10000,
-            "defaultLifetime" : 300
+            "defaultLifetime" : 3600
         }
     }
 }
