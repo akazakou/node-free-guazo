@@ -42,7 +42,7 @@ ImagesManager.prototype.getList = function (where, callback) {
     var parameters = [this.config.table, where, this.config.limit];
     var sql = 'SELECT * FROM ?? WHERE ? ORDER BY `lifetime` DESC LIMIT ?';
     
-    if(where.length === undefined) {
+    if(where.md5 === undefined) {
         parameters = [this.config.table, this.config.limit];
         sql = 'SELECT * FROM ?? ORDER BY `lifetime` DESC LIMIT ?';
     }
