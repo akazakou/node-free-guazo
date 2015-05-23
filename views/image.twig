@@ -23,7 +23,7 @@
                                 <h4>Lifetime: {{data.0.duration}}</h4>
                             </div>
                             <div class="col-sm-2 text-right">
-                                <a href="javascript:void(0);" type="button" class="btn btn-info btn-block" title="Do not delete this image">
+                                <a href="javascript:void(0);" id="lifeup-image" type="button" class="btn btn-info btn-block" title="Do not delete this image">
                                     <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LifeUp
                                 </a>
                             </div>
@@ -90,6 +90,17 @@
                 type: 'DELETE',
                 success: function(result) {
                     window.location = '/';
+                }
+            });
+        });
+
+        // запрос на увеличение срока жизни
+        $('#lifeup-image').on('click', function(){
+            jQuery.ajax({
+                url: '/lifeup/{{hash}}',
+                type: 'GET',
+                success: function(result) {
+                    window.location = window.location;
                 }
             });
         });

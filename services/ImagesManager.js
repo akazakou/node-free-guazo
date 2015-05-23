@@ -53,7 +53,7 @@ ImagesManager.prototype.getList = function (where, callback) {
         for(var i in result) {
             result[i]['lifetime'] = new moment(result[i]['lifetime']);
             var duration = result[i]['lifetime'] - new moment();
-            result[i]['duration'] = moment(duration).utcOffset(0).format("HH:mm:ss");
+            result[i]['duration'] = (parseInt(moment(duration).utcOffset(0).format("DDD")) -1) + ' days ' + moment(duration).utcOffset(0).format("HH:mm:ss");
         }
         
         if(callback !== undefined) callback(result);
@@ -68,6 +68,20 @@ ImagesManager.prototype.getList = function (where, callback) {
 ImagesManager.prototype.delete = function (md5, callback) {
     var sql = 'DELETE FROM ?? WHERE ?';
     this.mysql.query(sql, [this.config.table, {"md5":md5}], function (err, result) {
+        if(err) throw err;
+        if(callback !== undefined) callback(result);
+    });
+};
+
+/**
+ * Продление жизни файла на определенный срок
+ * @param {string} md5
+ * @param {function} callback
+ */
+ImagesManager.prototype.lifeup = function (md5, callback) {
+    var sql = 'UPDATE ?? SET `lifetime` = DATE_ADD(NOW(), INTERVAL 1 MONTH) WHERE ?';
+    this.mysql.query(sql, [this.config.table, {"md5":md5}], function (err, result) {
+        if(err) throw err;
         if(callback !== undefined) callback(result);
     });
 };
