@@ -20,7 +20,7 @@
                                 </a>
                             </div>
                             <div class="col-sm-6">
-                                <h4>Lifetime: {{data.0.duration}}</h4>
+                                <h4>Lifetime: <span id="duration">{{data.0.lifetime}}</span></h4>
                             </div>
                             <div class="col-sm-2 text-right">
                                 <a href="javascript:void(0);" id="lifeup-image" type="button" class="btn btn-info btn-block" title="Do not delete this image">
@@ -62,7 +62,7 @@
 </div> 
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         // инициализация работы с буффером
         var client = new ZeroClipboard($("#clipboard"));
         client.on("ready", function (readyEvent) {
@@ -76,33 +76,40 @@
         });
 
         // закрвать сообщение по клику на крестик
-        $('#success-message a.close').on('click', function(){
+        $('#success-message a.close').on('click', function () {
             $('#success-message').slideUp();
         });
 
         // выделять все содержимое по фокусу на поле
-        $("#image-url").on('focus', function() { $(this).select(); } );
+        $("#image-url").on('focus', function () {
+            $(this).select();
+        });
 
         // запрос на удаление изображения
-        $('#delete-image').on('click', function(){
+        $('#delete-image').on('click', function () {
             jQuery.ajax({
                 url: '/delete/{{hash}}',
                 type: 'DELETE',
-                success: function(result) {
+                success: function (result) {
                     window.location = '/';
                 }
             });
         });
 
         // запрос на увеличение срока жизни
-        $('#lifeup-image').on('click', function(){
+        $('#lifeup-image').on('click', function () {
             jQuery.ajax({
                 url: '/lifeup/{{hash}}',
                 type: 'GET',
-                success: function(result) {
+                success: function (result) {
                     window.location = window.location;
                 }
             });
+        });
+
+        // Обратный отсчет жизни
+        $('#duration').countdown(new Date('{{data.0.lifetime}}'), function (event) {
+            $(this).html(event.strftime('%D days %H:%M:%S'));
         });
     });
 </script>        

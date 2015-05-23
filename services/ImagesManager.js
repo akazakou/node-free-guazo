@@ -49,13 +49,6 @@ ImagesManager.prototype.getList = function (where, callback) {
     
     this.mysql.query(sql, parameters, function (err, result) {
         if(err) return logger.log('error', util.format('Service "%s" can not complete query' + "\n" + err.stack, self.name));
-        
-        for(var i in result) {
-            result[i]['lifetime'] = new moment(result[i]['lifetime']);
-            var duration = result[i]['lifetime'] - new moment();
-            result[i]['duration'] = (parseInt(moment(duration).utcOffset(0).format("DDD")) -1) + ' days ' + moment(duration).utcOffset(0).format("HH:mm:ss");
-        }
-        
         if(callback !== undefined) callback(result);
     });
 };
