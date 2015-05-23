@@ -1,23 +1,20 @@
 {% include 'header.twig' %}
 
-        
-    <div class="col-md-10 col-xs-12 col-md-offset-1 vertical-center">
-        <div class="container">
-            {% if data is empty %}
-                
-            <h2>Images not uploaded yet</h2>
-            <p>Use /upload.cgi action for upload image</p>
-            
-            {% else %}
-                
-                {% for image in data %}
-                    <a href="{{url}}{{image.md5}}">
-                        <img id="small-image" class="img-thumbnail" src="{{imageUrl}}{{image.md5}}.png" alt="Image {{image.md5}}" title="Image {{image.md5}}" />
-                    </a>
-                {% endfor %}
-            
-            {% endif %}
-        </div>
-    </div> 
-            
+<div class="container vert-offset-top-1">
+    {% if data is empty %}
+
+        <h2>Images not uploaded yet</h2>
+        <p>Use /upload.cgi action for upload image</p>
+
+    {% else %}
+
+        {% for image in data %}
+            <a href="{{url}}{{image.md5}}">
+                <img class="small-image" src="{{imageUrl}}{{image.md5}}.png" alt="Image {{image.md5}}" title="Image {{image.md5}}" />
+            </a>
+        {% endfor %}
+
+    {% endif %}
+</div>
+
 {% include 'footer.twig' %}

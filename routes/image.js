@@ -1,3 +1,5 @@
+var config = require('config');
+
 module.exports.autoroute = {
     get: {
         '/image/:hash': imageAction
@@ -16,6 +18,8 @@ function imageAction(req, res) {
         res.render('image.twig', {
             title: "Node.js Company Guazo | Image " + hashValue,
             hash: hashValue,
+            imageUrl: config.get('upload.imageUrl'),
+            url: config.get('upload.url'),
             data: imageData
         });
     });

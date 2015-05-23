@@ -1,28 +1,83 @@
 {% include 'header.twig' %}
 
-        
-    <div class="vertical-center">
-        <div class="container">
-            {% if data is empty %}
-                
+
+<div class="vert-offset-top-1">
+    <div class="container">
+        {% if data is empty %}
+
             <h2>Image not found</h2>
             <p>Image was expired or you entered wrong URL</p>
-            
-            {% else %}
-                <div class="row big-image-container">
-                    <div class="col-md-5">
-                        <a href="/" type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
-                        </a>
+
+        {% else %}
+
+            <div class="row vert-offset-top-1">
+                <div class="col-md-8 col-md-offset-2">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <a href="/" type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4>Lifetime: {{data.0.duration}}</h4>
+                            </div>
+                            <div class="col-sm-2 text-right">
+                                <a href="javascript:void(0);" type="button" class="btn btn-info btn-block" title="Do not delete this image">
+                                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LifeUp
+                                </a>
+                            </div>
+                            <div class="col-sm-2 text-right">
+                                <a href="javascript:void(0);" type="button" class="btn btn-danger btn-block" title="Delete this image immideatly">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="image-url" value="{{imageUrl}}{{hash}}.png" />
+                            </div>
+                            <div class="col-sm-2 text-right">
+                                <a href="javascript:void(0);" id="clipboard" type="button" class="btn btn-info btn-block" data-clipboard-target="image-url" title="Copy image link to clipboard" >
+                                    <span class="glyphicon glyphicon-copy" aria-hidden="true"></span> Copy
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="alert alert-success" id="success-message" style="display: none;">
+                        <a href="javascript:void(0);" class="close" data-dismiss="alert">&times;</a>
+                        Image URL success copied in your clipboard.
                     </div>
-                    <div class="col-md-7">
-                        <h4>Image will be expired in {{data.0.duration}}</h4>
-                    </div>
+
                 </div>
-            <img id="big-image" class="img-thumbnail" src="/upload/{{hash}}.png" alt="Image {{hash}}" title="Image {{hash}}"/>
-            
-            {% endif %}
-        </div>
-    </div> 
-            
+            </div>
+
+            <div class="row text-center big-image vert-offset-top-2">
+                <img src="{{imageUrl}}{{hash}}.png" alt="Image {{hash}}" title="Image {{hash}}"/>
+            </div>
+
+        {% endif %}
+    </div>
+</div> 
+
+<script type="text/javascript">
+    var client = new ZeroClipboard($("#clipboard"));
+    client.on("ready", function (readyEvent) {
+        client.on("aftercopy", function (event) {
+            var message = $('#success-message');
+            message.slideDown();
+            setTimeout(function () {
+                message.slideUp();
+            }, 5000);
+        });
+    });
+    
+    $('#success-message a.close').on('click', function(){
+        $('#success-message').slideUp();
+    });
+    
+    $("#image-url").on('focus', function() { $(this).select(); } );
+</script>        
+
 {% include 'footer.twig' %}
