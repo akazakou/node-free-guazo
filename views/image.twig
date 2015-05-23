@@ -28,7 +28,7 @@
                                 </a>
                             </div>
                             <div class="col-sm-2 text-right">
-                                <a href="javascript:void(0);" type="button" class="btn btn-danger btn-block" title="Delete this image immideatly">
+                                <a href="javascript:void(0);" id="delete-image" type="button" class="btn btn-danger btn-block" title="Delete this image immideatly">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
                                 </a>
                             </div>
@@ -62,22 +62,38 @@
 </div> 
 
 <script type="text/javascript">
-    var client = new ZeroClipboard($("#clipboard"));
-    client.on("ready", function (readyEvent) {
-        client.on("aftercopy", function (event) {
-            var message = $('#success-message');
-            message.slideDown();
-            setTimeout(function () {
-                message.slideUp();
-            }, 5000);
+    $(document).ready(function(){
+        // инициализация работы с буффером
+        var client = new ZeroClipboard($("#clipboard"));
+        client.on("ready", function (readyEvent) {
+            client.on("aftercopy", function (event) {
+                var message = $('#success-message');
+                message.slideDown();
+                setTimeout(function () {
+                    message.slideUp();
+                }, 5000);
+            });
+        });
+
+        // закрвать сообщение по клику на крестик
+        $('#success-message a.close').on('click', function(){
+            $('#success-message').slideUp();
+        });
+
+        // выделять все содержимое по фокусу на поле
+        $("#image-url").on('focus', function() { $(this).select(); } );
+
+        // запрос на удаление изображения
+        $('#delete-image').on('click', function(){
+            jQuery.ajax({
+                url: '/delete/{{hash}}',
+                type: 'DELETE',
+                success: function(result) {
+                    window.location = '/';
+                }
+            });
         });
     });
-    
-    $('#success-message a.close').on('click', function(){
-        $('#success-message').slideUp();
-    });
-    
-    $("#image-url").on('focus', function() { $(this).select(); } );
 </script>        
 
 {% include 'footer.twig' %}

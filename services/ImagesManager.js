@@ -60,4 +60,16 @@ ImagesManager.prototype.getList = function (where, callback) {
     });
 };
 
+/**
+ * Удаление информации из базы данных
+ * @param {string} md5
+ * @param {function} callback
+ */
+ImagesManager.prototype.delete = function (md5, callback) {
+    var sql = 'DELETE FROM ?? WHERE ?';
+    this.mysql.query(sql, [this.config.table, {"md5":md5}], function (err, result) {
+        if(callback !== undefined) callback(result);
+    });
+};
+
 module.exports = ImagesManager;
