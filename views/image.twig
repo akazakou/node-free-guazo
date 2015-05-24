@@ -20,7 +20,7 @@
                                 </a>
                             </div>
                             <div class="col-sm-6">
-                                <h4>Lifetime: <span id="duration">-- days --:--:--</span></h4>
+                                <h4>Lifetime: <span id="duration" data-duration="{{data.0.lifetime}}">-- days --:--:--</span></h4>
                             </div>
                             <div class="col-sm-2 text-right">
                                 <a href="/lifeup/{{hash}}" id="lifeup-image" type="button" class="btn btn-info btn-block" title="Do not delete this image">
@@ -85,10 +85,6 @@
             $(this).select();
         });
 
-        // Обратный отсчет жизни
-        $('#duration').countdown(new Date('{{data.0.lifetime}}'), function (event) {
-            $(this).html(event.strftime('%D days %H:%M:%S'));
-        });
     });
 </script>        
 
