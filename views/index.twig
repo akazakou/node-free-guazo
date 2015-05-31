@@ -10,7 +10,7 @@
 
         {% for image in data %}
             <a href="{{url}}{{image.md5}}">
-                <img class="small-image" src="{{imageUrl}}{{image.md5}}.png" alt="Image {{image.md5}}" title="Image {{image.md5}}" />
+                <div class="thumb" style="background-image: url('{{imageUrl}}{{image.md5}}.png');" title="Image {{image.md5}}"></div>
             </a>
         {% endfor %}
 

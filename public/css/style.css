@@ -4,9 +4,12 @@
     box-shadow: 0 0 30px black;
 }
 
-.small-image {
-    max-width: 250px;
-    max-height: 250px;
+.thumb {
     box-shadow: 0 0 20px #000;
+    display: inline-block;
+    width: 17%;
+    height: 200px;
+    background-position: center center;
+    background-size: cover;
     margin: 15px;
 }
