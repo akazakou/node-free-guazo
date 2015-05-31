@@ -40,11 +40,11 @@ ImagesManager.prototype.init = function () {
 ImagesManager.prototype.getList = function (where, callback) {
     var self = this;
     var parameters = [this.config.table, where, this.config.limit];
-    var sql = 'SELECT * FROM ?? WHERE ? ORDER BY `lifetime` DESC LIMIT ?';
+    var sql = 'SELECT * FROM ?? WHERE ? ORDER BY `date` DESC LIMIT ?';
     
     if(where.md5 === undefined) {
         parameters = [this.config.table, this.config.limit];
-        sql = 'SELECT * FROM ?? ORDER BY `lifetime` DESC LIMIT ?';
+        sql = 'SELECT * FROM ?? ORDER BY `date` DESC LIMIT ?';
     }
     
     this.mysql.query(sql, parameters, function (err, result) {
