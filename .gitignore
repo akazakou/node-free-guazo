@@ -3,3 +3,4 @@
 /public/bootstrap/*
 /public/jquery/*
 /public/zeroclipboard/*
+/config/local.json
