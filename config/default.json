@@ -3,7 +3,10 @@
         "cluster": false,
         "port": 3001,
         "maxSockets": 4096,
-        "timezone": "Europe/Minsk"
+        "timezone": "Europe/Minsk",
+        "session": {
+            "secretKey" : "change that string"
+        }
     },
 
     "upload": {

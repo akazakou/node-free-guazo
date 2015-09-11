@@ -38,6 +38,7 @@ if (config.get('server.cluster') && cluster.isMaster) {
     
 } else {
     var express = require('express'),
+        session = require('express-session'),
         bodyParser = require('body-parser'),
         multipart = require('connect-multiparty'),
         expressWinston = require('express-winston'),
@@ -49,6 +50,18 @@ if (config.get('server.cluster') && cluster.isMaster) {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(multipart());
     app.use(bodyParser.json());
+
+    // поддержка обработки Session
+    var excludedPaths = ['/upload.cgi'];
+    var sessionMiddleware = session({
+        secret: config.get('server.session.secretKey'),
+        name: "sid",
+        cookie: {maxAge: 1000 * 3600 * 24 * 365 * 10}
+    });
+    app.use(function (req, res, next) {
+        if (excludedPaths.indexOf(req.url) >= 0) return next();
+        sessionMiddleware(req, res, next);
+    });
     
     // подключение Twig шаблонизатора
     app.set('views', __dirname + '/views');

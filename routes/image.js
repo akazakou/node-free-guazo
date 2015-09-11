@@ -11,9 +11,19 @@ module.exports.autoroute = {
 function imageAction(req, res) {
     var hashValue = req.params.hash;
 
+    logger.log('debug', util.format("SessionID id for image page %s", req.sessionID));
+
     serviceLoader.get('ManagerImages').getList({
         md5: hashValue
     }, function (imageData) {
+
+        for(key in imageData) {
+            if(imageData[key].owner === "") {
+                serviceLoader.get('ManagerImages').connectOwner(hashValue, req.sessionID, function(){
+                    logger.log('debug', util.format("Set owner %s for %s image hash", req.sessionID));
+                });
+            }
+        }
 
         if (imageData.length === 0)
             res.status(404);
@@ -45,7 +55,7 @@ function deleteAction(req, res) {
         }
     };
 
-    serviceLoader.get('ManagerImages').delete(hash, function (result) {
+    serviceLoader.get('ManagerImages').delete({"md5":hash, "owner":req.sessionID}, function (result) {
         fsdelete();
     });
 }

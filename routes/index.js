@@ -7,7 +7,7 @@ module.exports.autoroute = {
 };
 
 function indexAction(req, res){
-    serviceLoader.get('ManagerImages').getList({}, function(imageData){
+    serviceLoader.get('ManagerImages').getList({"owner": req.sessionID}, function(imageData){
         
         res.render('index.twig', {
             title: "Node.js Company Guazo | Fast Showed Images",

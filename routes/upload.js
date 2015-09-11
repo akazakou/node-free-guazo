@@ -14,7 +14,7 @@ function uploadAction(req, res) {
     var fs = require('fs-extra'),
         imageinfo = require('imageinfo'),
         config = require('config');
-    
+
     var registerFile = function (path, url, hash) {
         fs.readFile(path, function(err, data) {
             if (err) throw err;
@@ -32,7 +32,8 @@ function uploadAction(req, res) {
                 "width" : info.width,
                 "height" : info.height,
                 "size" : data.length,
-                "lifetime": moment().add(serviceLoader.get('Cron').config.defaultLifetime, 'seconds').format("YYYY-MM-DD HH:mm:ss")
+                "lifetime": moment().add(serviceLoader.get('Cron').config.defaultLifetime, 'seconds').format("YYYY-MM-DD HH:mm:ss"),
+                "owner": ''
             }, function(mysqlResult){
                 logger.log('debug', util.format("Image with hash: %s stored success", hash));
             });

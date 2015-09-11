@@ -42,11 +42,6 @@ ImagesManager.prototype.getList = function (where, callback) {
     var parameters = [this.config.table, where, this.config.limit];
     var sql = 'SELECT * FROM ?? WHERE ? ORDER BY `date` DESC LIMIT ?';
     
-    if(where.md5 === undefined) {
-        parameters = [this.config.table, this.config.limit];
-        sql = 'SELECT * FROM ?? ORDER BY `date` DESC LIMIT ?';
-    }
-    
     this.mysql.query(sql, parameters, function (err, result) {
         if(err) return logger.log('error', util.format('Service "%s" can not complete query' + "\n" + err.stack, self.name));
         if(callback !== undefined) callback(result);
@@ -55,12 +50,12 @@ ImagesManager.prototype.getList = function (where, callback) {
 
 /**
  * Удаление информации из базы данных
- * @param {string} md5
+ * @param {object} where
  * @param {function} callback
  */
-ImagesManager.prototype.delete = function (md5, callback) {
+ImagesManager.prototype.delete = function (where, callback) {
     var sql = 'DELETE FROM ?? WHERE ?';
-    this.mysql.query(sql, [this.config.table, {"md5":md5}], function (err, result) {
+    this.mysql.query(sql, [this.config.table, where], function (err, result) {
         if(err) throw err;
         if(callback !== undefined) callback(result);
     });
@@ -74,6 +69,23 @@ ImagesManager.prototype.delete = function (md5, callback) {
 ImagesManager.prototype.lifeup = function (md5, callback) {
     var sql = 'UPDATE ?? SET `lifetime` = DATE_ADD(NOW(), INTERVAL 1 MONTH) WHERE ?';
     this.mysql.query(sql, [this.config.table, {"md5":md5}], function (err, result) {
+        if(err) throw err;
+        if(callback !== undefined) callback(result);
+    });
+};
+
+/**
+ * Связывание загруженного изображения без владельца с его владельцем
+ * @param {type} md5
+ * @param {type} owner
+ * @param {type} callback
+ * @returns {undefined}
+ */
+ImagesManager.prototype.connectOwner = function (md5, owner, callback) {
+    var sql = 'UPDATE ?? SET ? WHERE ?';
+    var data = [this.config.table, {"owner":owner}, {"md5":md5}];
+    
+    this.mysql.query(sql, data, function (err, result) {
         if(err) throw err;
         if(callback !== undefined) callback(result);
     });
