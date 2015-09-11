@@ -34,9 +34,15 @@ function deleteAction(req, res) {
     var fsdelete = function () {
         var fs = require('fs-extra');
         var path = config.get('upload.directory') + hash + '.png';
-        fs.delete(path, function () {
+
+        if(typeof fs.delete === 'function') {
+            fs.delete(path, function () {
+                res.redirect('/');
+            });
+        } else {
+            logger.log('error', util.format('Can\'t delete image %s', path));
             res.redirect('/');
-        });
+        }
     };
 
     serviceLoader.get('ManagerImages').delete(hash, function (result) {
