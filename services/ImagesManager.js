@@ -53,9 +53,9 @@ ImagesManager.prototype.getList = function (where, callback) {
  * @param {object} where
  * @param {function} callback
  */
-ImagesManager.prototype.delete = function (where, callback) {
-    var sql = 'DELETE FROM ?? WHERE ?';
-    this.mysql.query(sql, [this.config.table, where], function (err, result) {
+ImagesManager.prototype.delete = function (md5, owner, callback) {
+    var sql = 'DELETE FROM ?? WHERE md5 = ? AND owner = ?';
+    this.mysql.query(sql, [this.config.table, md5, owner], function (err, result) {
         if(err) throw err;
         if(callback !== undefined) callback(result);
     });
