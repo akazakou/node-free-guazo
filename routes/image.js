@@ -1,5 +1,6 @@
 var config = require('config');
 
+// initializate and map routes
 module.exports.autoroute = {
     get: {
         '/image/:hash': imageAction,
@@ -8,6 +9,11 @@ module.exports.autoroute = {
     }
 };
 
+/**
+ * Displaying image information 
+ * @param {Request} req
+ * @param {Response} res
+ */
 function imageAction(req, res) {
     var hashValue = req.params.hash;
 
@@ -36,9 +42,16 @@ function imageAction(req, res) {
     });
 }
 
+/**
+ * Delete image from database and warehouse
+ * @param {type} req
+ * @param {type} res
+ * @returns {undefined}
+ */
 function deleteAction(req, res) {
     var hash = req.params.hash;
 
+    // delete image from warehouse
     var fsdelete = function () {
         var fs = require('fs-extra');
         var path = config.get('upload.directory') + hash + '.png';
@@ -53,11 +66,17 @@ function deleteAction(req, res) {
         }
     };
 
+    // delete image from database
     serviceLoader.get('ManagerImages').delete(hash, req.sessionID, function (result) {
         fsdelete();
     });
 }
 
+/**
+ * up image life cycle
+ * @param {type} req
+ * @param {type} res
+ */
 function lifeupAction(req, res) {
     var hash = req.params.hash;
     serviceLoader.get('ManagerImages').lifeup(hash, function (result) {
