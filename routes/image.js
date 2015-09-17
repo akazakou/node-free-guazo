@@ -70,6 +70,8 @@ function deleteAction(req, res) {
     serviceLoader.get('ManagerImages').delete(hash, req.sessionID, function (result) {
         if(result.affectedRows > 0) {
             fsdelete();
+        } else {
+            res.redirect('/');
         }
     });
 }
