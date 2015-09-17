@@ -68,7 +68,9 @@ function deleteAction(req, res) {
 
     // delete image from database
     serviceLoader.get('ManagerImages').delete(hash, req.sessionID, function (result) {
-        fsdelete();
+        if(result.affectedRows > 0) {
+            fsdelete();
+        }
     });
 }
 
