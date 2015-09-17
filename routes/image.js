@@ -26,7 +26,10 @@ function imageAction(req, res) {
                 serviceLoader.get('ManagerImages').connectOwner(hashValue, req.sessionID, function(){
                     logger.log('debug', util.format("Set owner %s for %s image hash", req.sessionID));
                 });
+
+                imageData[key].owner = req.sessionID;
             }
+
         }
 
         if (imageData.length === 0)
@@ -37,7 +40,8 @@ function imageAction(req, res) {
             hash: hashValue,
             imageUrl: config.get('upload.imageUrl'),
             url: config.get('upload.url'),
-            data: imageData
+            data: imageData,
+            sessionID: req.sessionID
         });
     });
 }

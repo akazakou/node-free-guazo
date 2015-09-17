@@ -23,14 +23,18 @@
                                 <h4>Lifetime: <span id="duration" data-duration="{{data.0.lifetime}}">-- days --:--:--</span></h4>
                             </div>
                             <div class="col-sm-2 text-right">
+                                {% if sessionID == data.0.owner %}
                                 <a href="/lifeup/{{hash}}" id="lifeup-image" type="button" class="btn btn-info btn-block" title="Do not delete this image">
                                     <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LifeUp
                                 </a>
+                                {% endif %}
                             </div>
                             <div class="col-sm-2 text-right">
+                                {% if sessionID == data.0.owner %}
                                 <a href="/delete/{{hash}}" id="delete-image" type="button" class="btn btn-danger btn-block" title="Delete this image immideatly">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
                                 </a>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="form-group">
